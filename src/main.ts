@@ -1,14 +1,30 @@
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
+import { createApp } from "vue";
+import { createPinia } from "pinia";
 
-import App from './App.vue'
-import router from './router'
+import App from "./App.vue";
+import router from "./router";
+import { setupI18n } from "@/i18n";
+import "../index.css";
 
-import './assets/main.css'
+const i18n = setupI18n({
+  legacy: false, // needed to use Composition API
+  locale: "en",
+  fallbackLocale: "en",
+  allowComposition: true,
+  messages: {
+    en: {
+      app_name: "Huxle",
+      german: "Deutsch",
+      english: "English",
+    },
+    de: {},
+  },
+});
 
-const app = createApp(App)
+const app = createApp(App);
 
-app.use(createPinia())
-app.use(router)
+app.use(i18n);
+app.use(createPinia());
+app.use(router);
 
-app.mount('#app')
+app.mount("#app");
