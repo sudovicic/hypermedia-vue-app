@@ -6,11 +6,6 @@ import type { Key, KeyState } from "@/types";
 import { ref } from "vue";
 
 const keyStates: Record<Key, KeyState> = ref({});
-
-// eslint-disable-next-line
-function handleKeyPress(key: Key) {
-  // TODO: implement
-}
 </script>
 
 <template>
@@ -18,5 +13,5 @@ function handleKeyPress(key: Key) {
   <main>
     <Huxle />
   </main>
-  <Keyboard @key-press="handleKeyPress" :key-states="keyStates" />
+  <Keyboard :key-states="keyStates" />
 </template>

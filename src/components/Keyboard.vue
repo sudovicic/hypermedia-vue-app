@@ -1,13 +1,38 @@
 <script setup lang="ts">
 import type { Key, KeyState, Row } from "@/types";
+import { onUnmounted } from "vue";
+import { ALL_KEYS } from "@/types";
+import { useHuxleStore } from "@/stores/huxle-store";
 
 defineProps<{
   keyStates: Record<Key, KeyState>;
 }>();
 
-defineEmits<{
-  (e: "keyPress", key: string): void;
-}>();
+window.addEventListener("keyup", handleNativeKeyUp);
+onUnmounted(() => {
+  window.removeEventListener("keyup", handleNativeKeyUp);
+});
+
+function handleNativeKeyUp(e: KeyboardEvent) {
+  if (!ALL_KEYS.includes(e.key as Key)) return;
+  handleKeyPress(e.key as Key);
+}
+
+function handleKeyPress(key: Key) {
+  switch (key) {
+    case "Backspace":
+      popTile();
+      break;
+    case "Enter":
+      evaluateCurrentRow();
+      break;
+    default:
+      pushTile(key);
+      break;
+  }
+}
+
+const { pushTile, popTile, evaluateCurrentRow } = useHuxleStore();
 
 const rows: Row[] = [
   ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
@@ -27,7 +52,7 @@ const rows: Row[] = [
         v-for="key in row"
         :key="key"
         class="p-4 mx-1 bg-gray-300 rounded font-bold uppercase transition-colors"
-        @click="$emit('keyPress', key)"
+        @click="handleKeyPress(key)"
       >
         <span v-if="key !== 'Backspace'">{{ key }}</span>
         <svg
