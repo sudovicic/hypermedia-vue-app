@@ -1,3 +1,5 @@
+<script setup lang="ts"></script>
+
 <template>
-  <div>Huxle Skeleton</div>
+  <div class="w-screen"></div>
 </template>
