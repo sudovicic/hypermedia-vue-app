@@ -5,85 +5,48 @@ import type { HuxleRow } from "@/types";
 export const useHuxleStore = defineStore("huxle", {
   state: () => ({
     currentRowIndex: 0,
-    rows: [
-      {
-        tiles: [
-          {
-            key: "c",
-            keyState: "present",
-          },
-          {
-            key: "h",
-            keyState: "absent",
-          },
-          {
-            key: "o",
-            keyState: "absent",
-          },
-          {
-            key: "c",
-            keyState: "present",
-          },
-          {
-            key: "o",
-            keyState: "absent",
-          },
-        ],
-        rowState: "evaluated",
-      },
-      {
-        tiles: [
-          {
-            key: "w",
-            keyState: "initial",
-          },
-          {
-            key: "e",
-            keyState: "initial",
-          },
-          {
-            key: "i",
-            keyState: "initial",
-          },
-          {
-            key: "r",
-            keyState: "initial",
-          },
-          {
-            key: "d",
-            keyState: "initial",
-          },
-        ],
-        rowState: "initial",
-      },
-      {
-        tiles: [{}, {}, {}, {}, {}],
-        rowState: "initial",
-      },
-      {
-        tiles: [{}, {}, {}, {}, {}],
-        rowState: "initial",
-      },
-      {
-        tiles: [{}, {}, {}, {}, {}],
-        rowState: "initial",
-      },
-      {
-        tiles: [{}, {}, {}, {}, {}],
-        rowState: "initial",
-      },
-    ] as HuxleRow[],
+    nextTileIndex: 0,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    rows: Array(...Array(6)).map((_) => ({
+      tiles: [{}, {}, {}, {}, {}],
+      rowState: "initial",
+    })) as HuxleRow[],
   }),
-  getters: {},
+  getters: {
+    currentRow: (state) => state.rows[state.currentRowIndex],
+  },
   actions: {
     pushTile(key: Key) {
-      console.log(`pushTile: key = ${key}`);
+      if (this.nextTileIndex < 5) {
+        this.rows[this.currentRowIndex].tiles[this.nextTileIndex] = {
+          key: key,
+          keyState: "initial",
+        };
+        this.nextTileIndex++;
+      }
     },
     popTile() {
-      console.log("popTile");
+      if (this.nextTileIndex > 0) {
+        this.rows[this.currentRowIndex].tiles[this.nextTileIndex - 1] = {};
+        this.nextTileIndex--;
+      }
     },
+    // TODO: properly evaluate row based on the actual word to be guessed
     evaluateCurrentRow() {
-      console.log("evaluateCurrentRow");
+      if (
+        this.currentRowIndex < 6 &&
+        this.nextTileIndex === 5 &&
+        this.currentRow.rowState === "initial"
+      ) {
+        this.rows[this.currentRowIndex].rowState = "evaluated";
+        this.currentRow.tiles.map((tile) => (tile.keyState = "correct"));
+        this.nextTileIndex = 0;
+        if (this.currentRowIndex < 5) {
+          this.currentRowIndex++;
+        } else {
+          alert("won or lost");
+        }
+      }
     },
   },
 });

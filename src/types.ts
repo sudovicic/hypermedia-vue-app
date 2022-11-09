@@ -40,8 +40,8 @@ export type Row = Key[];
 export type GameStatus = "IN_PROGRESS" | "WIN" | "FAIL";
 
 export type Tile = {
-  key: Key;
-  keyState: KeyState;
+  key?: Key;
+  keyState?: KeyState;
 };
 
 export type HuxleRow = {
