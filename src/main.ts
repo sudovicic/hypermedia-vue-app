@@ -14,8 +14,11 @@ const i18n = setupI18n({
   messages: {
     en: {
       app_name: "Huxle",
-      german: "Deutsch",
-      english: "English",
+      lang_de: "Deutsch",
+      lang_en: "English",
+      create_page_name: "Huxle Admin",
+      create_headline: "Create a new Huxle",
+      create_cta: "Create Link",
     },
     de: {},
   },

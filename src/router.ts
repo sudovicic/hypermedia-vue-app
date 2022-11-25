@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import type { RouteRecordRaw } from "vue-router";
 import Home from "./pages/Home.vue";
+import Create from "./pages/Create.vue";
 
 // export type AppRouteNames = 'home'
 
@@ -9,6 +10,11 @@ const routes: RouteRecordRaw[] = [
     name: "home",
     path: "/",
     component: Home,
+  },
+  {
+    name: "create",
+    path: "/create",
+    component: Create,
   },
   // {
   //   path: "/about",

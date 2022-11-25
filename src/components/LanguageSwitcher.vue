@@ -11,11 +11,11 @@ function changeLocale(l: "en" | "de") {
 <template>
   <div class="">
     <button type="submit" class="inline" @click="changeLocale('de')">
-      {{ t("german") }}
+      {{ t("lang_de") }}
     </button>
     &nbsp;|&nbsp;
     <button type="submit" class="inline" @click="changeLocale('en')">
-      {{ t("english") }}
+      {{ t("lang_en") }}
     </button>
   </div>
 </template>

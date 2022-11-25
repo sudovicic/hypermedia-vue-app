@@ -50,3 +50,10 @@ export type HuxleRow = {
 };
 
 export type HuxleRowState = "initial" | "evaluated";
+
+// TODO: extend with more languages
+export const ALL_LANGUAGES = ["de", "en"] as const;
+
+type LanguageTuple = typeof ALL_LANGUAGES;
+
+export type Language = LanguageTuple[number];
