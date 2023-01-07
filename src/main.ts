@@ -30,6 +30,7 @@ const i18n = setupI18n({
       change_lang_info: "Optional: add another word in a different language!",
       required_field: "This field is required!",
       word_five_chars: "Word has to be five characters long!",
+      only_chars: "Word must contain only letters!",
     },
     de: {
       app_name: "Huxle",
@@ -49,6 +50,7 @@ const i18n = setupI18n({
       change_lang_info: "Optional: Füge ein Wort in einer anderen Sprach hinzu!",
       required_field: "Dieses Feld wird benötig!",
       word_five_chars: "Das Wort muss 5 Buchstaben lang sein!",
+      only_chars: "Wort darf nur aus Buchstaben bestehen!",
     },
   },
 });
