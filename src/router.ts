@@ -8,7 +8,7 @@ import Create from "./pages/Create.vue";
 const routes: RouteRecordRaw[] = [
   {
     name: "home",
-    path: "/",
+    path: "/:customhuxle?",
     component: Home,
   },
   {
