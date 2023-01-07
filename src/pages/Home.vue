@@ -14,7 +14,7 @@ const keyStates: Record<Key, KeyState> = ref({});
     <LanguageSwitcher />
   </NavBar>
   <main>
-    <Huxle />
+    <Huxle :custom-huxle="($route.params.customhuxle as string)" />
   </main>
   <Keyboard :key-states="keyStates" />
 </template>
