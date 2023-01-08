@@ -1,14 +1,14 @@
-<script setup lang="ts">
-import { ref } from "vue";
-
-const layoutClasses = ref(
-  "absolute top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full"
-);
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <div id="defaultModal" tabindex="-1" :class="[layoutClasses]">
-    <div class="relative w-full h-full max-w-2xl md:h-auto">
+  <div class="fixed w-screen h-screen bg-gray-700 bg-opacity-75"></div>
+
+  <div
+    id="defaultModal"
+    class="w-11/12 absolute -translate-x-2/4 top-1/4 left-2/4 right-0 z-50 overflow-x-hidden overflow-y-auto h-modal md:h-full"
+    tabindex="-1"
+  >
+    <div class="relative h-full md:h-auto">
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
         <div
           class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600"
