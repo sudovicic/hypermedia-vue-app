@@ -1,3 +1,3 @@
-export function useDecodeBase64(input: Object) {
-  return window.atob(JSON.stringify(input));
+export function useDecodeBase64(input: string) {
+  return JSON.parse(window.atob(input));
 }
