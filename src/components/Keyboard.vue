@@ -3,6 +3,7 @@ import type { Key, KeyState, Row } from "@/types";
 import { onUnmounted } from "vue";
 import { ALL_KEYS } from "@/types";
 import { useHuxleStore } from "@/stores/huxle-store";
+import { computed } from "@vue/reactivity";
 
 defineProps<{
   keyStates: Record<Key, KeyState>;
@@ -13,6 +14,8 @@ onUnmounted(() => {
   window.removeEventListener("keyup", handleNativeKeyUp);
 });
 
+const store = useHuxleStore();
+
 function handleNativeKeyUp(e: KeyboardEvent) {
   if (!ALL_KEYS.includes(e.key as Key)) return;
   handleKeyPress(e.key as Key);
@@ -21,18 +24,21 @@ function handleNativeKeyUp(e: KeyboardEvent) {
 function handleKeyPress(key: Key) {
   switch (key) {
     case "Backspace":
-      popTile();
+      store.popTile();
       break;
     case "Enter":
-      evaluateCurrentRow();
+      store.evaluateCurrentRow();
       break;
     default:
-      pushTile(key);
+      store.pushTile(key);
+      store.setCurrentWord(inputWord.value);
       break;
   }
 }
 
-const { pushTile, popTile, evaluateCurrentRow } = useHuxleStore();
+const inputWord = computed(() =>
+  store.rows[store.getCurrentWordIndex].tiles.map((tile) => tile.key).join("")
+);
 
 const rows: Row[] = [
   ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
@@ -43,15 +49,11 @@ const rows: Row[] = [
 
 <template>
   <div class="mt-8">
-    <div
-      v-for="(row, i) in rows"
-      :key="i"
-      class="flex justify-center w-full mb-2"
-    >
+    <div v-for="(row, i) in rows" :key="i" class="flex w-full mb-2">
       <button
         v-for="key in row"
         :key="key"
-        class="p-4 mx-1 bg-gray-300 rounded font-bold uppercase transition-colors"
+        class="w-full p-2 py-4 mx-0.5 bg-gray-300 rounded font-bold uppercase transition-colors"
         @click="handleKeyPress(key)"
       >
         <span v-if="key !== 'Backspace'">{{ key }}</span>
