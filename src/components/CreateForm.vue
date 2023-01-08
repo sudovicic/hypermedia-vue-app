@@ -6,7 +6,7 @@ import { ErrorMessage, Field, Form } from "vee-validate";
 import { reactive } from "vue";
 import { useI18n } from "vue-i18n";
 
-type CustomGameMetaData = {
+export type CustomGameMetaData = {
   languageSelect1: string;
   languageSelect2: string;
   wordInput1: string;
@@ -100,16 +100,25 @@ const copyTextToClipboard = (): void => {
         <div class="text-base text-red-600">
           <ErrorMessage name="languageSelect1" />
         </div>
-        <select
+        <Field
           id="languageSelect1"
           name="languageSelect1"
+          as="select"
           required
+          :size="1"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
-          <option v-for="lang in ALL_LANGUAGES" :key="lang" :value="lang">
+          <option value="" hidden disabled>{{ t("select_language") }}</option>
+
+          <option
+            v-for="(lang, index) in ALL_LANGUAGES"
+            :key="lang"
+            :value="lang"
+            :selected="index === 0"
+          >
             {{ t(`lang_${lang}`) }}
           </option>
-        </select>
+        </Field>
         <label for="wordInput1">{{ t("word") }}</label>
         <div class="text-base text-red-600">
           <ErrorMessage name="wordInput1" />
@@ -139,15 +148,17 @@ const copyTextToClipboard = (): void => {
         <div class="text-base text-red-600">
           <ErrorMessage name="languageSelect2" />
         </div>
-        <select
+        <Field
           id="languageSelect2"
+          as="select"
           name="languageSelect2"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
+          <option value="" hidden disabled>{{ t("select_language") }}</option>
           <option v-for="lang in ALL_LANGUAGES" :key="lang" :value="lang">
             {{ t(`lang_${lang}`) }}
           </option>
-        </select>
+        </Field>
         <label for="wordInput2">{{ t("word") }}</label>
         <div class="text-base text-red-600">
           <ErrorMessage name="wordInput2" />
