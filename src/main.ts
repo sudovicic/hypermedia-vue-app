@@ -31,6 +31,10 @@ const i18n = setupI18n({
       required_field: "This field is required!",
       word_five_chars: "Word has to be five characters long!",
       only_chars: "Word must contain only letters!",
+      game_over: "You're a loser!",
+      game_win: "Genius!",
+      sorry: "Sorry!",
+      invalid_url: "The given link is invalid.",
     },
     de: {
       app_name: "Huxle",
@@ -51,6 +55,10 @@ const i18n = setupI18n({
       required_field: "Dieses Feld wird benötig!",
       word_five_chars: "Das Wort muss 5 Buchstaben lang sein!",
       only_chars: "Wort darf nur aus Buchstaben bestehen!",
+      game_over: "Du bist ein Verlierer!",
+      game_win: "Genie!",
+      sorry: "Sorry!",
+      invalid_url: "Der Link ist ungültig.",
     },
   },
 });
