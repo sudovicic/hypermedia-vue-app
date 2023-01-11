@@ -7,6 +7,7 @@ This template should help get you started developing with Vue 3 in Vite.
 S2110629001 - Ernes Ibrovic
 
 Former Member:
+
 S2110629008 - Simon Udovicic
 
 S2210629013 - Sebastian Mayrhuber
