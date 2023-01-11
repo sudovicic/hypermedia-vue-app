@@ -8,7 +8,9 @@ S2110629001 - Ernes Ibrovic
 
 Former Member:
 S2110629008 - Simon Udovicic
+
 S2210629013 - Sebastian Mayrhuber
+
 S2210629012 - Philipp Mayrhuber
 
 ## Recommended IDE Setup
