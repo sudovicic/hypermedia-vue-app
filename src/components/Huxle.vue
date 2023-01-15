@@ -2,7 +2,7 @@
 import Modal from "@/components/Modal.vue";
 import { useDecodeBase64 } from "@/composables/decoder";
 import { useHuxleStore } from "@/stores/huxle-store";
-import { onMounted, reactive } from "vue";
+import { onMounted, reactive, watch } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRoute } from "vue-router";
 import type { CustomGameMetaData } from "./CreateForm.vue";
@@ -13,6 +13,8 @@ const store = useHuxleStore();
 const route = useRoute();
 
 const invalidURL = reactive({ value: false });
+const changeLangModal = reactive({ value: false });
+const changeLang = reactive({ value: false });
 
 let customHuxleMetaDataRaw: string = "";
 let customHuxleMetaData: CustomGameMetaData = {} as CustomGameMetaData;
@@ -24,16 +26,27 @@ try {
   invalidURL.value = true;
 }
 
-const correctWord = reactive({ value: customHuxleMetaData.wordInput1 }).value;
-
 const reloadPage = (): void => {
   window.location.reload();
 };
 
 onMounted(() => {
-  store.initWord(correctWord);
+  store.setLanguage(customHuxleMetaData.languageSelect1);
+
+  store.initWord(customHuxleMetaData.wordInput1);
 });
-// TODO: imitate what the real Wordle saves to localStorage
+
+// watch works directly on a ref
+watch(
+  () => store.getLang,
+  async () => {
+    if (customHuxleMetaData.languageSelect1 === store.getLang) {
+      store.initWord(customHuxleMetaData.wordInput1);
+    } else if (customHuxleMetaData.languageSelect2 === store.getLang) {
+      store.initWord(customHuxleMetaData.wordInput2);
+    }
+  }
+);
 </script>
 
 <template>
@@ -45,6 +58,38 @@ onMounted(() => {
   -->
 
   <div class="mt-8 flex flex-col justify-center w-auto relative">
+    <Modal v-if="changeLangModal.value" v-on:close="reloadPage">
+      <template #header>
+        <h1>{{ t("change_lang_title") }}</h1>
+      </template>
+      <template #body>
+        <p>{{ t("change_lang") }}</p>
+        <div class="flex gap-3">
+          <button
+            class="p-3 px-4 bg-blue-700 text-white hover:bg-blue-400 rounded"
+            @click="
+              () => {
+                changeLang.value = true;
+                changeLangModal.value = false;
+              }
+            "
+          >
+            {{ t("yes") }}
+          </button>
+          <button
+            class="p-3 px-4 bg-zinc-100 hover:bg-zinc-300 rounded"
+            @click="
+              () => {
+                changeLang.value = false;
+                changeLangModal.value = false;
+              }
+            "
+          >
+            {{ t("no") }}
+          </button>
+        </div>
+      </template>
+    </Modal>
     <Modal v-if="invalidURL.value" v-on:close="reloadPage">
       <template #header>
         <h1>{{ t("sorry") }}</h1>
