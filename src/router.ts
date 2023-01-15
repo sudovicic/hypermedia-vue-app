@@ -16,6 +16,15 @@ const routes: RouteRecordRaw[] = [
     path: "/create",
     component: Create,
   },
+  {
+    name: "root",
+    path: "/",
+    redirect: to => {
+      // the function receives the target route as the argument
+      // we return a redirect path/location here.
+      return { path: "/create" };
+    },
+  },
   // {
   //   path: "/about",
   //   name: "about",
