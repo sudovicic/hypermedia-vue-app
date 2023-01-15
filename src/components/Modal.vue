@@ -2,7 +2,7 @@
 
 <template>
   <div
-    class="fixed left-0 right-0 bottom-0 top 0 w-screen h-screen bg-gray-700 bg-opacity-100 z-10"
+    class="modal fixed left-0 right-0 bottom-0 top 0 w-screen h-screen bg-gray-700 bg-opacity-100 z-10"
   ></div>
 
   <div

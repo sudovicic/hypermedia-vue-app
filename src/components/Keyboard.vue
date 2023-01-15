@@ -16,7 +16,7 @@ onUnmounted(() => {
 
 const store = useHuxleStore();
 
-function handleNativeKeyUp(e: KeyboardEvent) {
+function handleNativeKeyUp(e: KeyboardEvent): void {
   if (!ALL_KEYS.includes(e.key as Key)) return;
   handleKeyPress(e.key as Key);
 }
