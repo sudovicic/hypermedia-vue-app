@@ -52,7 +52,7 @@ export type HuxleRow = {
 export type HuxleRowState = "initial" | "evaluated";
 
 // TODO: extend with more languages
-export const ALL_LANGUAGES = ["de", "en"] as const;
+export const ALL_LANGUAGES: Array<string> = ["de", "en"];
 
 type LanguageTuple = typeof ALL_LANGUAGES;
 
