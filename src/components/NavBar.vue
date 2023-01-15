@@ -11,6 +11,11 @@ const { t } = useI18n();
 <template>
   <div class="flex justify-between p-4 bg-blue-300">
     <p class="text-lg font-bold">{{ t(headlineKey) }}</p>
+    <div class="text-center">
+      <router-link to="/create" class="text-lg font-bold"
+        >{{ t("create_huxle") }}
+      </router-link>
+    </div>
     <slot></slot>
   </div>
 </template>
