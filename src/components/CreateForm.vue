@@ -86,12 +86,22 @@ const copyTextToClipboard = (): void => {
         <div v-if="hasCopiedText.value" class="p-3 bg-zinc-100 rounded">
           <p>{{ t("text_has_been_copied") }}</p>
         </div>
-        <button
-          @click="copyTextToClipboard"
-          class="bg-gray-400 hover:bg-gray-300 text-white font-semibold py-2 px-4 rounded"
-        >
-          {{ t("copy_to_clipboard") }}
-        </button>
+        <div class="flex justify-between">
+          <button
+            @click="copyTextToClipboard"
+            class="bg-gray-400 hover:bg-gray-300 text-white font-semibold py-2 px-4 rounded"
+          >
+            {{ t("copy_to_clipboard") }}
+          </button>
+
+          <button
+            class="bg-blue-400 hover:bg-blue-300 text-white font-semibold py-2 px-4 rounded"
+          >
+            <a :href="inputText.text">
+              {{ t("open_link") }}
+            </a>
+          </button>
+        </div>
       </template>
     </Modal>
     <Form @submit="onSubmit" class="flex flex-col gap-y-4">
